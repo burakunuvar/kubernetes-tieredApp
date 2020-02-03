@@ -15,12 +15,11 @@ before_install:
   - gcloud config set compute/zone us-central1-a
   - gcloud container clusters get-credentials k8s-on-gcp
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-#  - docker build -t burakunuvar/client-test -f ./client/Dockerfile.dev ./client
-  - docker build -t stephengrider/react-test -f ./client/Dockerfile.dev ./client
-
+  - docker build -t burakunuvar/client-test -f ./client/Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true burakunuvar/client-test npm run test
+
 
 deploy:
   provider: script
